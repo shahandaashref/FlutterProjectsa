@@ -3,8 +3,26 @@ import 'package:my_flutter_app/Constant.dart';
 import 'package:my_flutter_app/onBoard/complete_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class VerficationScreen extends StatelessWidget {
+class VerficationScreen extends StatefulWidget {
   const VerficationScreen({super.key});
+
+  @override
+  State<VerficationScreen> createState() => _VerficationScreenState();
+}
+
+class _VerficationScreenState extends State<VerficationScreen> {
+  final TextEditingController _pinController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _verifyOtp() {
+    if (_formKey.currentState!.validate()) {
+      // الانتقال إلى الشاشة التالية إذا كان الإدخال صحيحًا
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const CompleteScreen()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +42,7 @@ class VerficationScreen extends StatelessWidget {
                     },
                     child: Icon(Icons.arrow_back_ios, color: maincolor),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Text(
                     "Verification",
                     textAlign: TextAlign.start,
@@ -38,7 +56,7 @@ class VerficationScreen extends StatelessWidget {
               ),
             ),
             Image.asset("images/vrifcation.jpg", height: 250),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               "Enter the OTP sent to \n your email:",
               textAlign: TextAlign.center,
@@ -50,51 +68,51 @@ class VerficationScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              child: Column(
-                children: [
-                  PinCodeTextField(
-                    appContext: context,
-                    length: 6,
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    onCompleted: (pin) {
-                      print("Entered PIN is: $pin");
-                    },
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(10),
-                      fieldHeight: 50,
-                      fieldWidth: 40,
-                      activeFillColor: maincolor.withOpacity(0.2),
-                      selectedFillColor: maincolor.withOpacity(0.1),
-                      inactiveFillColor: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextButton(
-                    onPressed: () {
-                      print("Resending OTP...");
-                    },
-                    child: Text(
-                      "Resend code",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: maincolor,
-                        fontWeight: FontWeight.bold,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    PinCodeTextField(
+                      appContext: context,
+                      length: 6,
+                      controller: _pinController,
+                      onChanged: (value) {},
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter the OTP";
+                        }
+                        return null;
+                      },
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(10),
+                        fieldHeight: 50,
+                        fieldWidth: 40,
+                        activeFillColor: maincolor.withOpacity(0.2),
+                        selectedFillColor: maincolor.withOpacity(0.1),
+                        inactiveFillColor: Colors.white,
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () {
+                        print("Resending OTP...");
+                      },
+                      child: Text(
+                        "Resend code",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: maincolor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CompleteScreen()));
-              },
+              onTap: _verifyOtp,
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 padding:

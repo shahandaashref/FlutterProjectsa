@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_app/pages/Homepage.dart';
 import 'package:my_flutter_app/pages/chat.dart';
-import 'package:my_flutter_app/pages/profileScreen.dart';
 import 'package:my_flutter_app/pages/tapBottomTwo.dart';
-import 'package:my_flutter_app/util/emogi.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _ProfileScreenState extends State<ProfileScreen> {
   int _selectedIndex = 0;
   String selectedMood = "";
   final TextEditingController _searchController = TextEditingController();
@@ -21,7 +20,7 @@ class _HomepageState extends State<Homepage> {
       _selectedIndex = index;
     });
 
-      switch (index) {
+        switch (index) {
       case 0:
         Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
         break;
@@ -37,7 +36,7 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
-  List<Map<String, dynamic>> exercises = [
+  List<Map<String, dynamic>> Cotegorys = [
     {"name": "Speaking Skills", "number": 18, "icon": Icons.favorite, "color": Colors.orange},
     {"name": "Reading Skills", "number": 16, "icon": Icons.book, "color": Colors.blue},
     {"name": "Writing Skills", "number": 17, "icon": Icons.edit, "color": Colors.red},
@@ -50,11 +49,9 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.blue[800],
       bottomNavigationBar: BottomNavigationBar(
       currentIndex: _selectedIndex,
-      //backgroundColor: Colors.blue[800],
-      backgroundColor:Colors.amber[800],
+      backgroundColor: Colors.blue[800],
         onTap: _onItemTapped,
         items: [
-          
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home", ),
           BottomNavigationBarItem(icon: Icon(Icons.apps_rounded), label: "Search"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
@@ -98,29 +95,7 @@ class _HomepageState extends State<Homepage> {
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
-                  SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("How do you feel?", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-                      Icon(Icons.more_horiz, color: Colors.white),
-                    ],
-                  ),
-                  SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      for (var mood in ["😔", "😊", "😀", "🥳"])
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedMood = mood;
-                            });
-                          },
-                          child: EmogiFace(emogi: mood, isSelected: selectedMood == mood),
-                        )
-                    ],
-                  ),
+                  
                 ],
               ),
             ),
@@ -137,20 +112,29 @@ class _HomepageState extends State<Homepage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Exercises", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        Text("Cotegorys", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        Icon(Icons.more_horiz),
+                      ],
+                    ),
+
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Cotegorys", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         Icon(Icons.more_horiz),
                       ],
                     ),
                     SizedBox(height: 20),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: exercises.length,
+                        itemCount: Cotegorys.length,
                         itemBuilder: (context, index) {
-                          return ExercisesList(
-                            excercisesname: exercises[index]["name"],
-                            excercisesnumber: exercises[index]["number"],
-                            icon: exercises[index]["icon"],
-                            color: exercises[index]["color"],
+                          return CotegorysList(
+                            excercisesname: Cotegorys[index]["name"],
+                            excercisesnumber: Cotegorys[index]["number"],
+                            icon: Cotegorys[index]["icon"],
+                            color: Cotegorys[index]["color"],
                           );
                         },
                       ),
@@ -166,13 +150,13 @@ class _HomepageState extends State<Homepage> {
   }
 }
 
-class ExercisesList extends StatelessWidget {
+class CotegorysList extends StatelessWidget {
   final String excercisesname;
   final int excercisesnumber;
   final IconData icon;
   final Color color;
   
-  const ExercisesList({super.key, required this.excercisesname, required this.excercisesnumber, required this.icon, required this.color});
+  const CotegorysList({super.key, required this.excercisesname, required this.excercisesnumber, required this.icon, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +173,7 @@ class ExercisesList extends StatelessWidget {
             child: Icon(icon, color: Colors.white),
           ),
           title: Text(excercisesname, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          subtitle: Text("$excercisesnumber Exercises", style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),
+          subtitle: Text("$excercisesnumber Cotegorys", style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),
           trailing: Icon(Icons.more_horiz),
         ),
       ),

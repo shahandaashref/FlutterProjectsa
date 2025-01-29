@@ -2,19 +2,34 @@ import 'package:flutter/material.dart';
 
 class EmogiFace extends StatelessWidget {
   final String emogi;
-  const EmogiFace({super.key, required this.emogi});
+  final bool isSelected; // يجب أن يكون نهائيًا (final)
+
+  const EmogiFace({super.key, required this.emogi, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
-    return   Container(
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[600],
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Center(child: Text(emogi,style: TextStyle(
-                        fontSize:28, 
-                      ),),),
-                    );
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.blue[800] : Colors.blue[600], // لون مختلف عند التحديد
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          if (isSelected) // إضافة تأثير ظل عند التحديد
+            BoxShadow(
+              color: Colors.blue.withOpacity(0.5),
+              blurRadius: 10,
+              spreadRadius: 2,
+            ),
+        ],
+      ),
+      child: Center(
+        child: Text(
+          emogi,
+          style: const TextStyle(
+            fontSize: 28,
+          ),
+        ),
+      ),
+    );
   }
 }
