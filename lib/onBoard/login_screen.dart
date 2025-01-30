@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: Container(
+                  child: SizedBox(
                   width: 340,
                   child: Text("Login",
                       textAlign: TextAlign.center,

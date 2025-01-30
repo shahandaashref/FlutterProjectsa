@@ -10,10 +10,12 @@ class ThirdScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return ReusableScreenContent(
-      imagePath: 'images/SitReadingDoodle (1).png',
-      title: 'Get Ready to Start!',
-      subtitle: 'Launch now and explore all the amazing features we have to offer.',
+    return SingleChildScrollView(
+      child: ReusableScreenContent(
+        imagePath: 'images/SitReadingDoodle (1).png',
+        title: 'Get Ready to Start!',
+        subtitle: 'Launch now and explore all the amazing features we have to offer.',
+      ),
     );
     //   return Column(
     //   children: [

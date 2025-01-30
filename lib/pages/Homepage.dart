@@ -12,9 +12,10 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _selectedIndex = 0;
+  //int _selectedIndexmood = 0;
   String selectedMood = "";
   final TextEditingController _searchController = TextEditingController();
-
+  
 
   void _onItemTapped(int index) {
     setState(() {
@@ -37,6 +38,13 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
+final Map<String, String> moodMessages = {
+    "😔": "Cheer up! Tomorrow is a new day. 🌤️",
+    "😊": "Keep smiling! Your positivity is contagious. 😊",
+    "😀": "You look happy! Keep up the good vibes. ✨",
+    "🥳": "Party time! Enjoy your moments. 🎉",
+  };
+
   List<Map<String, dynamic>> exercises = [
     {"name": "Speaking Skills", "number": 18, "icon": Icons.favorite, "color": Colors.orange},
     {"name": "Reading Skills", "number": 16, "icon": Icons.book, "color": Colors.blue},
@@ -48,19 +56,21 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[800],
-      bottomNavigationBar: BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      //backgroundColor: Colors.blue[800],
-      backgroundColor:Colors.amber[800],
-        onTap: _onItemTapped,
-        items: [
-          
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home", ),
-          BottomNavigationBarItem(icon: Icon(Icons.apps_rounded), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
-        ],
-      ),
+    bottomNavigationBar: BottomNavigationBar(
+  currentIndex: _selectedIndex,
+  backgroundColor: Colors.blue[800],  // تحديد لون الخلفية
+  selectedItemColor: Colors.white,   // لون الأيقونات والنص المختار
+  unselectedItemColor: Colors.grey[300], // لون الأيقونات والنص الغير مختار
+  type: BottomNavigationBarType.fixed, // تثبيت العناصر لتجنب التحريك التلقائي
+  onTap: _onItemTapped,
+  items: const [
+    BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+    BottomNavigationBarItem(icon: Icon(Icons.apps_rounded), label: "Search"),
+    BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+    BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
+  ],
+),
+
       body: SafeArea(
         child: Column(
           children: [
@@ -101,7 +111,7 @@ class _HomepageState extends State<Homepage> {
                   SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: const [
                       Text("How do you feel?", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
                       Icon(Icons.more_horiz, color: Colors.white),
                     ],
@@ -121,6 +131,20 @@ class _HomepageState extends State<Homepage> {
                         )
                     ],
                   ),
+                  SizedBox(height: 25),
+                  if (selectedMood.isNotEmpty)
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[600],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(moodMessages[selectedMood]!,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 250, 250, 250)),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -136,7 +160,7 @@ class _HomepageState extends State<Homepage> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text("Exercises", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         Icon(Icons.more_horiz),
                       ],

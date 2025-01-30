@@ -10,38 +10,13 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-return ReusableScreenContent(
-      imagePath: 'images/ReadingSideDoodle (2).png',
-      title: 'Ease of Learning and Use!',
-      subtitle: 'Our app provides you with a smooth and enjoyable experience to learn and use services effortlessly.',
-    );
-
-
-    //   return Column(
-    //   children: [
-    //     Image.asset('images/ReadingSideDoodle (2).png',height: 390,),
-    //     const Text('Welcome to our app',
-    //     textAlign: TextAlign.center,
-    //     style: TextStyle(
-    //       fontSize: 35,
-          
-    //       fontWeight: FontWeight.bold,
-    //       color: Color.fromARGB(255, 17, 119, 135),
-    //     ),
-    //     ),
-    //     Padding(
-    //         padding: EdgeInsets.all(20),
-    //         child:Text('This is the first screen',
-    //         textAlign: TextAlign.center,
-    //         style: TextStyle(
-    //         fontSize: 24,
-    //         color: Color.fromARGB(255, 4, 35, 40),
-    //     ),
-    //     ),
-    //     ),
-      
-    //   ],
-    // );
+return SingleChildScrollView(
+  child: ReusableScreenContent(
+        imagePath: 'images/ReadingSideDoodle (2).png',
+        title: 'Ease of Learning and Use!',
+        subtitle: 'Our app provides you with a smooth and enjoyable experience to learn and use services effortlessly.',
+      ),
+);
   }
 
 }

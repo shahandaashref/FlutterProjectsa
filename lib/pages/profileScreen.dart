@@ -36,30 +36,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  List<Map<String, dynamic>> Cotegorys = [
-    {"name": "Speaking Skills", "number": 18, "icon": Icons.favorite, "color": Colors.orange},
-    {"name": "Reading Skills", "number": 16, "icon": Icons.book, "color": Colors.blue},
-    {"name": "Writing Skills", "number": 17, "icon": Icons.edit, "color": Colors.red},
-    {"name": "Listening Skills", "number": 20, "icon": Icons.hearing, "color": Colors.green},
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[800],
-      bottomNavigationBar: BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      backgroundColor: Colors.blue[800],
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home", ),
-          BottomNavigationBarItem(icon: Icon(Icons.apps_rounded), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
-        ],
-      ),
+    bottomNavigationBar: BottomNavigationBar(
+  currentIndex: _selectedIndex,
+  backgroundColor: Colors.blue[800],  
+  selectedItemColor: Colors.white, 
+  
+  unselectedItemColor: const Color.fromARGB(255, 171, 171, 171), 
+  type: BottomNavigationBarType.fixed, 
+  onTap: _onItemTapped,
+  items: const [
+    BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+    BottomNavigationBarItem(icon: Icon(Icons.apps_rounded), label: "Search"),
+    BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+    BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
+  ],
+),
+
       body: SafeArea(
-        child: Column(
+        child:Column(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -68,115 +67,114 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Colors.blue[600],
+                            borderRadius: BorderRadius.circular(10)),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(Icons.arrow_back),
+                            color: Colors.white),
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Hi, Jared", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-                          Text("26 Jan, 2025", style: TextStyle(color: Colors.blue[100], fontSize: 12)),
+                        children: const [
+                          Text("Hi, Jared",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold)),
                         ],
                       ),
                       Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(color: Colors.blue[600], borderRadius: BorderRadius.circular(10)),
-                        child: Icon(Icons.notifications, color: Colors.white),
-                      )
+                        padding: EdgeInsets.all(7),
+                        decoration: BoxDecoration(
+                            color: Colors.blue[600],
+                            borderRadius: BorderRadius.circular(10)),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.settings),
+                            color: Colors.white),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 25),
-                  TextField(
-                    controller: _searchController,
-                    onChanged: (value) {},
-                    decoration: InputDecoration(
-                      fillColor: Colors.blue[600],
-                      filled: true,
-                      hintText: "Search",
-                      hintStyle: TextStyle(color: Colors.white70),
-                      prefixIcon: Icon(Icons.search, color: Colors.white),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: const Icon(Icons.person, size: 50),
+                        ),
+                        const SizedBox(width: 20),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text("Jared",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold)),
+                            Text("Active now",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300)),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  
-                ],
-              ),
-            ),
-            SizedBox(height: 25),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(25),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Cotegorys", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        Icon(Icons.more_horiz),
-                      ],
-                    ),
-
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Cotegorys", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        Icon(Icons.more_horiz),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: Cotegorys.length,
-                        itemBuilder: (context, index) {
-                          return CotegorysList(
-                            excercisesname: Cotegorys[index]["name"],
-                            excercisesnumber: Cotegorys[index]["number"],
-                            icon: Cotegorys[index]["icon"],
-                            color: Cotegorys[index]["color"],
-                          );
-                        },
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: const [
+                          Text("Friends",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold)),
+                          Text("265",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w300)),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
+                      Column(
+                        children: const [
+                          Text("Followers",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold)),
+                          Text("302",
+                          style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w300),
+                          ),
+                          ],
+                          ),
+                          ],
+                          ),
+                          ],
+
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+              ),],
+              ),
+              ),
+              );
   }
 }
 
-class CotegorysList extends StatelessWidget {
-  final String excercisesname;
-  final int excercisesnumber;
-  final IconData icon;
-  final Color color;
-  
-  const CotegorysList({super.key, required this.excercisesname, required this.excercisesnumber, required this.icon, required this.color});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Container(
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
-        child: ListTile(
-          leading: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12)),
-            child: Icon(icon, color: Colors.white),
-          ),
-          title: Text(excercisesname, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          subtitle: Text("$excercisesnumber Cotegorys", style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),
-          trailing: Icon(Icons.more_horiz),
-        ),
-      ),
-    );
-  }
-}

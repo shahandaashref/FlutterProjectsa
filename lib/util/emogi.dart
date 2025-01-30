@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class EmogiFace extends StatelessWidget {
   final String emogi;
-  final bool isSelected; // يجب أن يكون نهائيًا (final)
-
+  final bool isSelected;
   const EmogiFace({super.key, required this.emogi, this.isSelected = false});
 
   @override

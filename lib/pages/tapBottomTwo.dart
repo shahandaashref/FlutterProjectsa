@@ -49,17 +49,20 @@ class _BottomTwoState extends State<BottomTwo> {
     return Scaffold(
       backgroundColor: Colors.blue[800],
       bottomNavigationBar: BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      fixedColor: Colors.white38,
-      backgroundColor: Colors.blue[800],
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home", ),
-          BottomNavigationBarItem(icon: Icon(Icons.apps_rounded), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
-        ],
-      ),
+  currentIndex: _selectedIndex,
+  backgroundColor: Colors.blue[800],  // تحديد لون الخلفية
+  selectedItemColor: Colors.white,   // لون الأيقونات والنص المختار
+  unselectedItemColor: Colors.grey[300], // لون الأيقونات والنص الغير مختار
+  type: BottomNavigationBarType.fixed, // تثبيت العناصر لتجنب التحريك التلقائي
+  onTap: _onItemTapped,
+  items: const [
+    BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+    BottomNavigationBarItem(icon: Icon(Icons.apps_rounded), label: "Search"),
+    BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+    BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
+  ],
+),
+
       body: SafeArea(
         child: Column(
           children: [
@@ -113,7 +116,7 @@ class _BottomTwoState extends State<BottomTwo> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text("Cotegorys", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         Icon(Icons.more_horiz),
                       ],
@@ -122,13 +125,13 @@ class _BottomTwoState extends State<BottomTwo> {
 
                     Expanded(
                       child: Column(
-                        children: [
+                        children: const [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               
-                              Cotegorysr(color: const Color.fromARGB(255, 0, 119, 255), text: "Speaking Skills"),
-                              Cotegorysr(color: const Color.fromARGB(255, 217, 0, 255), text: "Speaking Skills"),
+                              Cotegorysr(color: Color.fromARGB(255, 0, 119, 255), text: "Speaking Skills"),
+                              Cotegorysr(color: Color.fromARGB(255, 217, 0, 255), text: "Speaking Skills"),
                               
                             ],
                           ),
@@ -138,8 +141,8 @@ class _BottomTwoState extends State<BottomTwo> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               
-                              Cotegorysr(color: const Color.fromARGB(255, 144, 0, 255), text: "Speaking Skills"),
-                              Cotegorysr(color: const Color.fromARGB(255, 255, 77, 0), text: "Speaking Skills"),
+                              Cotegorysr(color: Color.fromARGB(255, 144, 0, 255), text: "Speaking Skills"),
+                              Cotegorysr(color: Color.fromARGB(255, 255, 77, 0), text: "Speaking Skills"),
                               
                             ],
                           ),
@@ -151,7 +154,7 @@ class _BottomTwoState extends State<BottomTwo> {
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text("Cotegorys", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         Icon(Icons.more_horiz),
                       ],
