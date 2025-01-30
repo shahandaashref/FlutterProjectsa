@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 15),
                 Text(
-                  "OR Login With",
+                  "Or sign in using",
                   style: TextStyle(fontSize: 15, color: const Color.fromARGB(255, 8, 46, 52)),
                 ),
                 SizedBox(height: 15),
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         // Navigate to Sign Up screen
                       },
-                      child: Text("Sign Up"),
+                      child: Text("Sign Up now"),
                     ),
                   ],
                 ),

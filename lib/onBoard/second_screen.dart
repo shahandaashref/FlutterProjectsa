@@ -13,8 +13,8 @@ class SecondScreen extends StatelessWidget {
 return SingleChildScrollView(
   child: ReusableScreenContent(
         imagePath: 'images/ReadingSideDoodle (2).png',
-        title: 'Ease of Learning and Use!',
-        subtitle: 'Our app provides you with a smooth and enjoyable experience to learn and use services effortlessly.',
+        title: 'Easy to Learn, Fun to Use!',
+        subtitle: 'Enjoy a seamless experience while exploring new opportunities.',
       ),
 );
   }

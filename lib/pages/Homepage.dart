@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app/pages/chat.dart';
 import 'package:my_flutter_app/pages/profileScreen.dart';
@@ -58,10 +59,10 @@ final Map<String, String> moodMessages = {
       backgroundColor: Colors.blue[800],
     bottomNavigationBar: BottomNavigationBar(
   currentIndex: _selectedIndex,
-  backgroundColor: Colors.blue[800],  // تحديد لون الخلفية
-  selectedItemColor: Colors.white,   // لون الأيقونات والنص المختار
-  unselectedItemColor: Colors.grey[300], // لون الأيقونات والنص الغير مختار
-  type: BottomNavigationBarType.fixed, // تثبيت العناصر لتجنب التحريك التلقائي
+  backgroundColor: Colors.blue[800],  
+  selectedItemColor: Colors.white,   
+  unselectedItemColor: Colors.grey[300],
+  type: BottomNavigationBarType.fixed, 
   onTap: _onItemTapped,
   items: const [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
@@ -84,7 +85,7 @@ final Map<String, String> moodMessages = {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Hi, Jared", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text("Hi, Shahanda", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                           Text("26 Jan, 2025", style: TextStyle(color: Colors.blue[100], fontSize: 12)),
                         ],
                       ),
@@ -112,7 +113,7 @@ final Map<String, String> moodMessages = {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text("How do you feel?", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text("How are you feeling today??", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
                       Icon(Icons.more_horiz, color: Colors.white),
                     ],
                   ),
@@ -161,7 +162,7 @@ final Map<String, String> moodMessages = {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
-                        Text("Exercises", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        Text("Practice & Improve Your Skills", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         Icon(Icons.more_horiz),
                       ],
                     ),
@@ -190,13 +191,19 @@ final Map<String, String> moodMessages = {
   }
 }
 
-class ExercisesList extends StatelessWidget {
+class ExercisesList extends StatefulWidget {
   final String excercisesname;
-  final int excercisesnumber;
+  int excercisesnumber;
   final IconData icon;
   final Color color;
-  
-  const ExercisesList({super.key, required this.excercisesname, required this.excercisesnumber, required this.icon, required this.color});
+ExercisesList({super.key, required this.excercisesname, required this.excercisesnumber, required this.icon, required this.color});
+
+  @override
+  State<ExercisesList> createState() => _ExercisesListState();
+}
+
+class _ExercisesListState extends State<ExercisesList> {
+int number=0;
 
   @override
   Widget build(BuildContext context) {
@@ -209,11 +216,17 @@ class ExercisesList extends StatelessWidget {
           leading: AnimatedContainer(
             duration: Duration(milliseconds: 300),
             padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12)),
-            child: Icon(icon, color: Colors.white),
+            decoration: BoxDecoration(color: widget.color, borderRadius: BorderRadius.circular(12)),
+            child: IconButton(onPressed: (){
+            setState(() {
+                  widget.excercisesnumber=widget.excercisesnumber+number++;
+                  color:  Color.fromARGB(255, 14, 12, 12); // تحديث العدد داخل setState
+                });
+            
+            }, icon: Icon(widget.icon, color: Colors.white),iconSize: 30,),
           ),
-          title: Text(excercisesname, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          subtitle: Text("$excercisesnumber Exercises", style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),
+          title: Text(widget.excercisesname, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          subtitle: Text("${widget.excercisesnumber+ number} Exercises", style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),
           trailing: Icon(Icons.more_horiz),
         ),
       ),

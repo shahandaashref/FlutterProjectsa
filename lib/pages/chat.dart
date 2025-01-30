@@ -11,10 +11,15 @@ class Chatscreen extends StatefulWidget {
 
 class _ChatscreenState extends State<Chatscreen> {
   final TextEditingController _messageController = TextEditingController();
+    String userInput = "";
+
   
   List<Map<String, dynamic>> messages = [
-    {"message": "Hello!", "isMe": false}, // 🛑 رسالة أولية من الشخص الآخر
-    {"message": "How are you?", "isMe": false},
+  //     {"message": "Hi, how are you?", "isMe": false},
+  // {"message": "I'm good, thanks! How about you?", "isMe": false},
+  // {"message": "I'm doing well, just learning Flutter!", "isMe": false},
+  // {"message": "That's great! Keep it up!", "isMe": false},
+  // {"message": "I will, thanks!", "isMe": false},
   ];
 
   @override
@@ -25,9 +30,11 @@ class _ChatscreenState extends State<Chatscreen> {
 
   void sendMessage() {
     if (_messageController.text.trim().isNotEmpty) {
+      String userInput = _messageController.text.trim();
+
       setState(() {
         messages.insert(0, {
-          "message": _messageController.text.trim(),
+          "message": userInput,
           "isMe": true, // 🛑 هذه الرسالة من المستخدم
         });
 
@@ -36,15 +43,32 @@ class _ChatscreenState extends State<Chatscreen> {
 
       // 🛑 إضافة رد تلقائي من الشخص الآخر بعد ثانيتين
       Future.delayed(Duration(seconds: 2), () {
+        String botResponse = getBotResponse(userInput);
         setState(() {
           messages.insert(0, {
-            "message": "I got your message!",
+            "message": botResponse,
             "isMe": false, // 🛑 هذه الرسالة من الشخص الآخر
           });
         });
       });
     }
   }
+
+  String getBotResponse(String input) {
+  input = input.toLowerCase(); // نجعل النص كله حروف صغيرة للمقارنة بسهولة
+
+  if (input.contains("hello") || input.contains("hi")) {
+    return "Hi! How are you?";
+  } else if (input.contains("how are you")) {
+    return "I'm just a bot, but I'm doing great!";
+  } else if (input.contains("what's your name") || input.contains("who are you")) {
+    return "I'm your chatbot friend! 😊";
+  } else if (input.contains("bye")) {
+    return "Goodbye! Have a great day! 👋";
+  } else {
+    return "Sorry, I didn't understand that. Can you rephrase?";
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +99,7 @@ class _ChatscreenState extends State<Chatscreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text("Hi, Jared",
+                          Text("Shahanda",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,

@@ -58,7 +58,7 @@ class _VerficationScreenState extends State<VerficationScreen> {
             Image.asset("images/vrifcation.jpg", height: 250),
             const SizedBox(height: 20),
             Text(
-              "Enter the OTP sent to \n your email:",
+              "Enter the verification code sent to \n your email:",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,

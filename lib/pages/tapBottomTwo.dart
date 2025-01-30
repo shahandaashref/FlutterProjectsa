@@ -38,10 +38,11 @@ class _BottomTwoState extends State<BottomTwo> {
   }
 
   List<Map<String, dynamic>> Cotegorys = [
-    {"name": "Speaking Skills", "number": 18, "icon": Icons.favorite, "color": Colors.orange},
-    {"name": "Reading Skills", "number": 16, "icon": Icons.book, "color": Colors.blue},
-    {"name": "Writing Skills", "number": 17, "icon": Icons.edit, "color": Colors.red},
-    {"name": "Listening Skills", "number": 20, "icon": Icons.hearing, "color": Colors.green},
+    
+    {"name": "Speaking Skills", "number": 18, "icon": Image.asset("images/boy3.png",), "color": Colors.orange},
+    {"name": "Reading Skills", "number": 16, "icon": Image.asset("images/boy1.png",), "color": Colors.blue},
+    {"name": "Writing Skills", "number": 17, "icon":Image.asset("images/boy2.png",), "color": Colors.red},
+    {"name": "Listening Skills", "number": 20, "icon": Image.asset("images/boy4.png",), "color": Colors.green},
   ];
 
   @override
@@ -50,10 +51,10 @@ class _BottomTwoState extends State<BottomTwo> {
       backgroundColor: Colors.blue[800],
       bottomNavigationBar: BottomNavigationBar(
   currentIndex: _selectedIndex,
-  backgroundColor: Colors.blue[800],  // تحديد لون الخلفية
-  selectedItemColor: Colors.white,   // لون الأيقونات والنص المختار
-  unselectedItemColor: Colors.grey[300], // لون الأيقونات والنص الغير مختار
-  type: BottomNavigationBarType.fixed, // تثبيت العناصر لتجنب التحريك التلقائي
+  backgroundColor: Colors.blue[800], 
+  selectedItemColor: Colors.white,   
+  unselectedItemColor: Colors.grey[300],
+  type: BottomNavigationBarType.fixed, 
   onTap: _onItemTapped,
   items: const [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
@@ -76,7 +77,7 @@ class _BottomTwoState extends State<BottomTwo> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Hi, Jared", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text("Hi, Shahanda", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                           Text("26 Jan, 2025", style: TextStyle(color: Colors.blue[100], fontSize: 12)),
                         ],
                       ),
@@ -187,7 +188,7 @@ class _BottomTwoState extends State<BottomTwo> {
 class CotegorysList extends StatelessWidget {
   final String excercisesname;
   final int excercisesnumber;
-  final IconData icon;
+  final Image icon;
   final Color color;
   
   const CotegorysList({super.key, required this.excercisesname, required this.excercisesnumber, required this.icon, required this.color});
@@ -204,7 +205,7 @@ class CotegorysList extends StatelessWidget {
             duration: Duration(milliseconds: 300),
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12)),
-            child: Icon(icon, color: Colors.white),
+            child: IconButton(icon: icon,onPressed: (){},iconSize: 20,),
           ),
           title: Text(excercisesname, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           subtitle: Text("$excercisesnumber Cotegorys", style: TextStyle(color: Colors.black54, fontSize: 12, fontWeight: FontWeight.bold)),

@@ -13,8 +13,8 @@ class ThirdScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: ReusableScreenContent(
         imagePath: 'images/SitReadingDoodle (1).png',
-        title: 'Get Ready to Start!',
-        subtitle: 'Launch now and explore all the amazing features we have to offer.',
+        title: 'Get Started Today!',
+        subtitle: 'Unlock all the amazing features and begin your journey now!',
       ),
     );
   

@@ -117,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text("Jared",
+                            Text("Shahanda",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
