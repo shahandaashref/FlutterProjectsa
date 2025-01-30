@@ -11,12 +11,39 @@ class Chatscreen extends StatefulWidget {
 
 class _ChatscreenState extends State<Chatscreen> {
   final TextEditingController _messageController = TextEditingController();
-  List<String> messages = []; // 🛑 قائمة لحفظ جميع الرسائل
+  
+  List<Map<String, dynamic>> messages = [
+    {"message": "Hello!", "isMe": false}, // 🛑 رسالة أولية من الشخص الآخر
+    {"message": "How are you?", "isMe": false},
+  ];
 
   @override
   void dispose() {
     _messageController.dispose();
     super.dispose();
+  }
+
+  void sendMessage() {
+    if (_messageController.text.trim().isNotEmpty) {
+      setState(() {
+        messages.insert(0, {
+          "message": _messageController.text.trim(),
+          "isMe": true, // 🛑 هذه الرسالة من المستخدم
+        });
+
+        _messageController.clear();
+      });
+
+      // 🛑 إضافة رد تلقائي من الشخص الآخر بعد ثانيتين
+      Future.delayed(Duration(seconds: 2), () {
+        setState(() {
+          messages.insert(0, {
+            "message": "I got your message!",
+            "isMe": false, // 🛑 هذه الرسالة من الشخص الآخر
+          });
+        });
+      });
+    }
   }
 
   @override
@@ -85,9 +112,11 @@ class _ChatscreenState extends State<Chatscreen> {
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
                           return ChatBubble(
-                            message: messages[index], // 🛑 عرض الرسالة من القائمة
-                            isMe: true,
-                            avatarUrl: "https://example.com/myphoto.jpg",
+                            message: messages[index]["message"],
+                            isMe: messages[index]["isMe"],
+                            avatarUrl: messages[index]["isMe"]
+                                ? "https://example.com/myphoto.jpg"
+                                : "https://example.com/userphoto.jpg",
                           );
                         },
                       ),
@@ -119,15 +148,7 @@ class _ChatscreenState extends State<Chatscreen> {
                           ),
                           SizedBox(width: 12),
                           GestureDetector(
-                            onTap: () {
-                              if (_messageController.text.trim().isNotEmpty) {
-                                setState(() {
-                                  messages.insert(
-                                      0, _messageController.text.trim()); // 🛑 إضافة الرسالة
-                                });
-                                _messageController.clear();
-                              }
-                            },
+                            onTap: sendMessage,
                             child: Container(
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
